@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>risuto | </title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+  <div id="row-template" class="row hidden">
+    <div class="col-item-num">
+      <span class="item-num"></span>
+      <input type="checkbox" class="check-done">
+    </div>
+    <div class="col-item-name">
+      <input type="text" class="item-name" placeholder="Item's name">
+    </div>
+    <div class="col-item-price">
+      <input
+        required
+        min="1"
+        max="999"
+        maxlength="3"
+        type="text"
+        class="item-qty"
+        value=""
+        placeholder="Qty."
+        oninput="checkErr(this.parentElement.parentElement);">
+      <span>x</span>
+      <input
+        required
+        min="1"
+        max="999999999"
+        maxlength="9"
+        type="text"
+        class="item-price"
+        value=""
+        placeholder="Price"
+        pattern="^\$?\d{1,3}(,\d{3})*(\.\d{2})?$"
+        oninput="checkErr(this.parentElement.parentElement);">
+    </div>
+    <div class="col-item-total">
+      <div class="item-total">
+      </div>
+      <div class="item-total-display">
+      </div>
+    </div>
+  </div>
+  <div id="home">
+    <div class="home-inner">
+      <h1>List</h1>
+      <p>
+        A grocery/shopping list to manage your expenses
+      </p>
+      <p>
+        All list are saved in the browser
+      </p>
+      <div id="saved-list">
+        <button class="grocery-list">This week's grocery</button>
+        <button class="grocery-list">Office supplies</button>
+      </div>
+      <button class="grocery-list" id="new-list-btn">Create new list</button>
+    </div>
+  </div>
+  <div class="container">
+    <div id="table">
+      <div class="list-control">
+        <input type="text" name="list-title" id="list-title" value="Untitled list">
+        <div>
+          <input type="checkbox" name="show-not-done" id="show-not-done" checked>
+          <label for="show-not-done">Show unchecked</label>
+          <select name="list-currency" id="list-currency">
+            <option value="USD">$ USD</option>
+            <option value="JPY">Y JPY</option>
+            <option value="IDR" selected>Rp. IDR</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    
+    <div class="footer">
+      <div class="total-container">
+        <div id="total" class="display-currency"></div>
+      </div>  
+    </div>
+    
+    <div>
+      <button id="add-item">Add item</button>
+    </div>
+  </div>
+</body>
+
+</html>
