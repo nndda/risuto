@@ -1,3 +1,7 @@
+# Build directory
+dist/
+
+# Node gitignore
 # Logs
 logs
 *.log
