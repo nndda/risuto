@@ -13,7 +13,7 @@ html {
 }
 
 body {
-  font-family: 'Noto Sans JP', sans-serif;
+  font-family: 'Klee One', sans-serif;
   color: var(--text-col);
   background: var(--background);
   display: flex;
@@ -36,6 +36,10 @@ body {
 
 .hidden {
   display: none !important;
+}
+
+input, button, select {
+  font-family: 'Klee One', sans-serif;
 }
 
 input {
@@ -158,6 +162,30 @@ button.grocery-list {
 /* #table > .row > div:not(:last-child) {
   border-right: none;
 } */
+.check-done {
+  display: none;
+}
+
+.check-done:checked ~ .checkbox-empty {
+  display: none;
+}
+.check-done:not(:checked) ~ .checkbox-checked {
+  display: none;
+}
+
+.checkbox-empty,
+.checkbox-checked {
+  margin: auto;
+  margin-top: .5em;
+  border: 2px solid var(--primary);
+  background: none;
+  height: 1em;
+  width: 1em;
+}
+
+.checkbox-checked {
+  background: var(--primary);
+}
 
 
 #table > .row {
