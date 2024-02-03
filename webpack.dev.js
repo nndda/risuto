@@ -1,10 +1,8 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 
 module.exports = {
-  mode: "production",
+  mode: "development",
   entry: {
     vendor: "./src/vendor.ts",
     index: "./index.ts",
@@ -13,16 +11,13 @@ module.exports = {
     extensions: [".tsx", ".ts", ".js"],
   },
   output: {
-    filename: "[name].[fullhash].js",
+    filename: "[name].js",
     path: path.resolve(__dirname, "dist"),
     clean: true,
   },
   plugins: [
     new HtmlWebpackPlugin({
       template: "./src/index.html",
-    }),
-    new MiniCssExtractPlugin({
-      filename: "[name].[fullhash].css",
     }),
   ],
   module: {
@@ -41,16 +36,8 @@ module.exports = {
       },
       {
         test: /\.css$/i,
-        use: [MiniCssExtractPlugin.loader, "css-loader"],
+        use: ["style-loader", "css-loader"],
       },
     ]
-  },
-  optimization: {
-    minimizer: [
-      new CssMinimizerPlugin({
-        minify: CssMinimizerPlugin.cleanCssMinify,
-      }),
-    ],
-    minimize: true,
   },
 }
