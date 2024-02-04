@@ -1,4 +1,4 @@
-const currencies : Array<Array<string>> = [
+const currencies = [
   ["en-US", "USD", "$ USD"],
   ["ja-JP", "JPY", "¥ JPY"],
   ["id-ID", "IDR", "Rp IDR"],
@@ -6,7 +6,7 @@ const currencies : Array<Array<string>> = [
 const defaultCurr = "IDR";
 
 export interface Currency {
-    [key: string]: Intl.NumberFormat
+  [key: string]: Intl.NumberFormat
 }
 export function getCurrency() {
   let output : Currency = {};
@@ -16,7 +16,7 @@ export function getCurrency() {
         style: "currency",
         currency: value[1],
         minimumFractionDigits: 0,
-        maximumFractionDigits: ( value[1] == "IDR" ) ? 0 : 2,
+        maximumFractionDigits: (value[1] === "IDR") ? 0 : 2,
       });
     }
   );
