@@ -9,14 +9,14 @@
 
 <body>
   <div id="row-template" class="row hidden">
-    <div class="col-item-num">
+    <label class="col-item-num">
       <span class="item-num"></span>
-      <label class="checkbox">
+      <div class="checkbox">
         <input type="checkbox" class="check-done">
         <i class="checkbox-empty fa-regular fa-square"></i>
         <i class="checkbox-checked fa-solid fa-square-check"></i>
-      </label>
-    </div>
+      </div>
+    </label>
     <div class="col-item-name">
       <input type="text" class="item-name" placeholder="Item's name">
       <button class="button-icon button-del">
@@ -56,6 +56,19 @@
 
     <div id="home">
       <div class="home-inner">
+        <div class="theme-settings">
+          <div>
+            <button class="button-icon button-theme" id="button-theme-color">
+              <i class="fa-solid fa-palette"></i>
+            </button>
+            <div class="theme-color-dropdown collapse-height">
+            </div>
+          </div>
+          <button class="button-icon button-theme" id="button-theme-mode">
+            <i class="fa-solid fa-sun hidden"></i>
+            <i class="fa-solid fa-moon"></i>
+          </button>
+        </div>
         <h1>
           リスト
           <i class="fa-solid fa-cart-shopping fa-rotate-by" style="--fa-rotate-angle: -15deg;"></i>
@@ -84,7 +97,7 @@
           <input type="text" name="list-title" id="list-title" value="Untitled list">
           <div>
             <label>
-              <input type="checkbox" name="show-not-done" id="show-not-done" checked>
+              <input type="checkbox" name="show-unchecked" id="show-unchecked" checked>
               <i class="checkbox-empty fa-regular fa-square"></i>
               <i class="checkbox-checked fa-solid fa-square-check"></i>
             </label>
@@ -97,7 +110,10 @@
       
       <div class="footer">
         <div class="total-container">
+          <div>Total</div>
           <div id="total" class="display-currency"></div>
+          <div>Total checked</div>
+          <div id="total-checked" class="display-currency"></div>
         </div>  
       </div>
       

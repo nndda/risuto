@@ -10,6 +10,8 @@ html {
   --border-col: #ffffff38;
   --text-col: #eee;
   counter-reset: item-num;
+
+  --accent-color: #eeeeee;
 }
 
 body {
@@ -43,16 +45,24 @@ body {
 .hidden {
   display: none !important;
 }
-
-button.button-icon {
-  background: none;
-  border: none;
-  outline: none;
+.collapse-height {
+  height: 0 !important;
 }
 
 input, button, select {
   font-family: 'Klee One', sans-serif;
   cursor: pointer;
+  background: var(--accent-color);
+}
+select {
+  color: var(--background);
+}
+
+button.button-icon {
+  background: none;
+  border: none;
+  outline: none;
+  color: var(--accent-color);
 }
 
 input[type="text"] {
@@ -98,18 +108,27 @@ button.grocery-list {
   border: none;
   border-radius: 6px;
   padding: .5em 1em;
-  background: var(--primary);
+/*  background: var(--primary);*/
+  background: var(--accent-color);
   color: var(--secondary);
   font-weight: bold;
 }
 
+label > .checkbox-checked,
+label > .checkbox-empty {
+  color: var(--accent-color);
+}
+
 #new-list-btn {
-  border: 2px solid var(--border-col);
+/*  border: 2px solid var(--border-col);*/
+  border: 2px solid var(--accent-color);
   background: none;
-  color: var(--primary);
+/*  color: var(--primary);*/
+  color: var(--accent-color);
 }
 
 .home-inner {
+  position: relative;
   display: flex;
   flex-direction: column;
 /*   justify-content: center; */
@@ -125,6 +144,34 @@ button.grocery-list {
   opacity: .8;
 }
 
+.theme-settings {
+  position: absolute;
+  display: flex;
+/*  justify-content: center;*/
+  align-items: start;
+  right: 0;
+}
+.button-theme {
+  font-size: 1.25em;
+  padding: .25em;
+  margin: 0 .25em;
+}
+.theme-color-dropdown {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  align-items: center;
+/*  transition: .2s ease;*/
+}
+.theme-item {
+/*  display: inline-block;*/
+/*  background: white;*/
+  width: 1.2em;
+  height: 1.2em;
+  margin: .2em;
+  border-radius: 50%;
+}
 
 
 
@@ -136,8 +183,8 @@ button.grocery-list {
   border: none;
   border-radius: 6px;
   padding: .5em 1em;
-  background: var(--primary);
-  color: var(--secondary);
+  background: var(--accent-color);
+  color: var(--background);
   font-weight: bold;
 }
 
@@ -167,19 +214,20 @@ button.grocery-list {
 }
 
 .row-error .col-item-price {
-  background: #f0054260;
+/*  background: #f0054260;*/
+outline: 2px solid #f00542d0;;
 }
 
-.row {
+.row:not(.hidden):nth-of-type(odd) {
   background: #ffffff02;
 }
-.row:nth-child(even) {
-  background: #ffffff10;
+.row:not(.hidden):nth-of-type(even) {
+  background: #ffffff11;
 }
 
-.row > div {
+.row > div,
+.row > label {
   border: 1px solid var(--border-col);
-/*   border-top: none; */
   padding: .5em;
 }
 .header > div {
@@ -211,16 +259,20 @@ input[type="checkbox"]:not(:checked) ~ .checkbox-checked {
   text-align: center;
 }
 
-.row:not(.row-error) .checkbox {
+.row:not(.row-error) .col-item-num {
   cursor: pointer;
 }
-.row.row-error .checkbox {
+.row.row-error .col-item-num {
   cursor: not-allowed;
+}
+.row[data-checked="true"] .col-item-num {
+  color: var(--background);
+  background: var(--accent-color);
 }
 
 #table > .row {
   display: grid;
-  grid-template-columns: 2em auto 50%;
+  grid-template-columns: 2.5em auto 50%;
   grid-template-rows: auto auto;
 }
 #table > .row:last-child {
@@ -234,7 +286,10 @@ input[type="checkbox"]:not(:checked) ~ .checkbox-checked {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  margin-right: 2px;
   border-bottom: none;
+  color: var(--accent-color);
+  border-right: 2px solid var(--accent-color);
 }
 .item-num {
   text-align: center;
@@ -294,11 +349,6 @@ input[type="checkbox"]:not(:checked) ~ .checkbox-checked {
 
 
 
-
-/* .item-qty:after {
-  content: "x";
-} */
-
 .row-done > div:not(.col-item-num) {
 /*   opacity: .15 */
 }
@@ -306,32 +356,16 @@ input[type="checkbox"]:not(:checked) ~ .checkbox-checked {
   background: #20ee4034;
 }
 
-/* .row-done:before {
-  position: absolute;
-  content: "";
-  width: 100%;
-  height: 100%;
-  background: #fff2
-}
-.row-done:after {
-  position: absolute;
-  top: 25%;
-  left: 25%;
-  font-size: 2.5em;
-  transform: rotate(-6deg);
-  content: "DONE";
-  opacity: .8;
-} */
-
-
 .footer > .total-container {
-  border: 1px solid var(--border-col);
-  border-top: none;
-  max-width: 12em;
-  margin-left: auto;
-  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: auto auto;
+/*  width: fit-content;*/
+  margin-top: 1em;
 }
-#total {
+
+.footer > .total-container > div {
+  border: 1px solid var(--border-col);
+  box-sizing: border-box;
   min-height: 1em;
   padding: .5em;
 }
