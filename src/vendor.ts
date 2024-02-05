@@ -1,3 +1,6 @@
+// normalize.css
+import "normalize.css";
+
 // Fonts
 import "@fontsource/klee-one";
 

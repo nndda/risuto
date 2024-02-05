@@ -13,7 +13,8 @@
   },
   "dependencies": {
     "@fontsource/klee-one": "^5.0.11",
-    "@fortawesome/fontawesome-free": "^6.5.1"
+    "@fortawesome/fontawesome-free": "^6.5.1",
+    "normalize.css": "^8.0.1"
   },
   "devDependencies": {
     "css-loader": "^6.10.0",
