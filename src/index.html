@@ -5,9 +5,42 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>risuto | </title>
+  <meta name="theme-color" content="#eeeeee">
 </head>
 
-<body>
+<body dir="ltr">
+
+  <div id="modal-exports">
+    <div class="modal-inner">
+      <h1>
+        Export & import list
+      </h1>
+      <div class="exports-list">
+        <button class="button-export">
+          <i class="fa-solid fa-file-export"></i>
+          Copy as plain text
+        </button>
+        <br>
+        <button class="button-export" disabled>
+          <i class="fa-solid fa-file-csv"></i>
+          Download as JSON
+        </button>
+        <button class="button-export" disabled>
+          <i class="fa-solid fa-file-csv"></i>
+          Import JSON
+        </button>
+      </div>
+
+      <hr class="footer-divider">
+
+      <div class="export-plain-text">
+        <textarea>
+          This week's grocery
+        </textarea>
+      </div>
+    </div>
+  </div>
+
   <div id="row-template" class="row hidden">
     <label class="col-item-num">
       <span class="item-num"></span>
@@ -89,6 +122,17 @@
           Create new list
         </button>
       </div>
+      <div class="home-footer">
+        <a href="https://github.com/nndda">
+          <i class="fa-brands fa-github-alt"></i>
+          Source Code
+        </a>
+        <br>
+        <a href="https://github.com/nndda">
+          <i class="fa-solid fa-mug-hot"></i>
+          Buy me a coffee
+        </a>
+      </div>
     </div>
 
     <div class="list-container">
@@ -107,21 +151,36 @@
           </div>
         </div>
       </div>
+      <div class="controls-container">
+        <button id="add-item">
+          <i class="fa-solid fa-plus-circle"></i>
+          Add item
+        </button>
+        <button id="button-settings">
+          <i class="fa-solid fa-gear"></i>
+        </button>
+        <button id="button-settings">
+          <i class="fa-solid fa-share-from-square"></i>
+        </button>
+      </div>
+
+      <hr class="footer-divider">
       
       <div class="footer">
+        <div class="items-stats-checked">
+          <div id="items-checked">2</div>
+          <div class="divider"></div>
+          <div id="items-unchecked">5</div>
+        </div>
+        <div align="center">
+          Items checked
+        </div>
         <div class="total-container">
           <div>Total</div>
           <div id="total" class="display-currency"></div>
           <div>Total checked</div>
           <div id="total-checked" class="display-currency"></div>
         </div>  
-      </div>
-      
-      <div>
-        <button id="add-item">
-          <i class="fa-solid fa-plus"></i>
-          Add item
-        </button>
       </div>
     </div>
 
