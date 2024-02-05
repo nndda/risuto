@@ -7,7 +7,7 @@ html {
   --primary: #eee;
   --secondary: #555;
   --background: #111;
-  --border-col: #ffffff38;
+  --border-color: #ffffff38;
   --text-col: #eee;
   counter-reset: item-num;
 
@@ -43,10 +43,15 @@ body {
 
 
 .hidden {
-  display: none !important;
+  display: none;
 }
 .collapse-height {
-  height: 0 !important;
+  max-height: 0;
+}
+.hidden-collapse-height {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
 }
 
 input, button, select {
@@ -88,6 +93,8 @@ input.item-price {
 
 
 #home {
+  display: flex;
+  flex-direction: column;
   width: 100vw;
   height: 100vh;
   max-width: 340px;
@@ -100,11 +107,23 @@ input.item-price {
   height: 0 !important;
 }
 
+.home-footer {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: end;
+  padding: 1em;
+}
+.home-footer > a {
+  color: var(--accent-color);
+}
+
 button.grocery-list {
   width: 100%;
   margin: .5em 0;
   text-align: left;
-/*   border: 1px solid (--border-col); */
+/*   border: 1px solid (--border-color); */
   border: none;
   border-radius: 6px;
   padding: .5em 1em;
@@ -120,7 +139,7 @@ label > .checkbox-empty {
 }
 
 #new-list-btn {
-/*  border: 2px solid var(--border-col);*/
+/*  border: 2px solid var(--border-color);*/
   border: 2px solid var(--accent-color);
   background: none;
 /*  color: var(--primary);*/
@@ -173,15 +192,23 @@ label > .checkbox-empty {
   border-radius: 50%;
 }
 
+#table {
+  border-bottom: .2em solid var(--accent-color);
+}
 
+.controls-container {
 
-#add-item {
+  margin-left: 1.5em;
+  margin-top: 0;
+}
+
+.controls-container > button {
   display: inline-block;
-  padding: .2em 1em;
-  margin: 1em;
+  padding: .2em .5em;
+  margin: 0;
   text-align: center;
   border: none;
-  border-radius: 6px;
+  border-radius: 0 0 6px 6px;
   padding: .5em 1em;
   background: var(--accent-color);
   color: var(--background);
@@ -227,13 +254,9 @@ outline: 2px solid #f00542d0;;
 
 .row > div,
 .row > label {
-  border: 1px solid var(--border-col);
+  border: 1px solid var(--border-color);
   padding: .5em;
 }
-.header > div {
-  border: 1px solid var(--border-col);
-}
-
 
 /* #table > .row > div:not(:last-child) {
   border-right: none;
@@ -268,6 +291,7 @@ input[type="checkbox"]:not(:checked) ~ .checkbox-checked {
 .row[data-checked="true"] .col-item-num {
   color: var(--background);
   background: var(--accent-color);
+  border-bottom: 1px solid var(--background);
 }
 
 #table > .row {
@@ -276,7 +300,7 @@ input[type="checkbox"]:not(:checked) ~ .checkbox-checked {
   grid-template-rows: auto auto;
 }
 #table > .row:last-child {
-  border-bottom: 1px solid var(--border-col);
+  border-bottom: 1px solid var(--border-color);
 }
 
 .row > .col-item-num {
@@ -287,7 +311,7 @@ input[type="checkbox"]:not(:checked) ~ .checkbox-checked {
   flex-direction: column;
   justify-content: center;
   margin-right: 2px;
-  border-bottom: none;
+/*  border-bottom: none;*/
   color: var(--accent-color);
   border-right: 2px solid var(--accent-color);
 }
@@ -304,7 +328,13 @@ input[type="checkbox"]:not(:checked) ~ .checkbox-checked {
 .item-name {
   flex-grow: 1;
   height: 100%;
+  width: 100%;
+  box-sizing: border-box;
   font-size: 1.15em;
+  font-weight: bold;
+  margin-left: .2em;
+  color: var(--accent-color);
+  letter-spacing: .15ch;
 }
 .row > .col-item-name:not(:focus-within) ~ .button-del {
   display: none;
@@ -312,8 +342,9 @@ input[type="checkbox"]:not(:checked) ~ .checkbox-checked {
 
 .row > .col-item-price {
   display: flex;
-  border-bottom: none;
+  border-bottom: 1px solid var(--accent-color);
   border-left: none;
+  border-right: none;
 }
 .item-price {
   padding-left: .8em;
@@ -323,9 +354,12 @@ input[type="checkbox"]:not(:checked) ~ .checkbox-checked {
   max-width: 2em;
 }
 .row > .col-item-total {
-  border-bottom: none;
+  border-bottom: 1px solid var(--accent-color);
 }
-
+.row:last-child > .col-item-price,
+.row:last-child > .col-item-total {
+  border-bottom: 0;
+}
 
 
 .item-total {
@@ -342,10 +376,6 @@ input[type="checkbox"]:not(:checked) ~ .checkbox-checked {
   grid-column-end: 4;
 }
 
-
-#table .row.header {
-  display: none;
-}
 
 
 
@@ -364,10 +394,48 @@ input[type="checkbox"]:not(:checked) ~ .checkbox-checked {
 }
 
 .footer > .total-container > div {
-  border: 1px solid var(--border-col);
+  border: 1px solid var(--border-color);
   box-sizing: border-box;
   min-height: 1em;
   padding: .5em;
+}
+
+hr.footer-divider {
+  border: none;
+  border-bottom: 3px dashed var(--accent-color);
+  background: none;
+  margin: auto;
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+  width: 90%;
+}
+
+.items-stats-checked {
+  margin: auto;
+/*  background: white;
+  color: black;*/
+  border: 2px solid var(--accent-color);
+  display: flex;
+  flex-direction: column;
+  height: 1.5em;
+  width: 1.5em;
+  padding: 1em;
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
+  font-size: 2em;
+}
+.items-stats-checked > .divider {
+  min-height: 2px;
+  width: 120%;
+  transform: rotate(-45deg);
+  background: var(--accent-color);
+}
+.items-stats-checked > #items-checked {
+  transform: translateX(-.5em);
+}
+.items-stats-checked > #items-unchecked {
+  transform: translateX(.5em) translateY(-.2em);
 }
 
 @media ( max-width : 600px ) {
@@ -383,7 +451,7 @@ input[type="checkbox"]:not(:checked) ~ .checkbox-checked {
   }
 
   #table, .footer {
-    padding: 0 1em;
+    margin: 0 1em;
   }
 }
 
