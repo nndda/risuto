@@ -37,14 +37,19 @@ const total = d.getElementById("total");
 const totalChecked = d.getElementById("total-checked");
 const toggleShowUncheckedButton = <HTMLInputElement>d.getElementById("show-unchecked");
 
+const hiddenRowClassName = "hidden-collapse-height";
+
+const itemsTotalChecked = d.getElementById("items-checked");
+const itemsTotalUnchecked = d.getElementById("items-unchecked");
+
 function toggleShowUnchecked() {
   const rows = table.getElementsByClassName("row");
   for (let i = rows.length - 1; i >= 0; i--) {
     if (toggleShowUncheckedButton.checked) {
-      rows[i].classList.remove("hidden");
+      rows[i].classList.remove(hiddenRowClassName);
     }
     else {
-      rows[i].classList.toggle("hidden",
+      rows[i].classList.toggle(hiddenRowClassName,
         (
           <HTMLInputElement>rows[i]
           .getElementsByClassName("check-done")[0])
@@ -65,29 +70,29 @@ export function addItemRow(item : ListItem = {
 }) {
   let new_row = <HTMLElement>rowTemplate.cloneNode(true);
   new_row.removeAttribute("id");
-  new_row.classList.remove("hidden");
+  new_row.classList.remove(hiddenRowClassName);
   new_row.setAttribute("data-checked", `${item.checked}`);
 
   const checkButton = <HTMLInputElement>new_row.getElementsByClassName("check-done")[0];
-  checkButton.oninput = () => {
-    checkRow(new_row);
-  };
-
   const itemPrice = <HTMLInputElement>new_row.getElementsByClassName("item-price")[0];
   const itemName = <HTMLInputElement>new_row.getElementsByClassName("item-name")[0];
   const itemQty = <HTMLInputElement>new_row.getElementsByClassName("item-qty")[0];
 
+  checkButton.checked = item.checked;
   itemPrice.value = `${item.price}`;
   itemName.value = `${item.name}`;
   itemQty.value = `${item.qty}`;
 
+  checkButton.oninput = () => {checkRow(new_row);};
   itemPrice.oninput = () => {checkErr(new_row);};
   itemQty.oninput = () => {checkErr(new_row);};
 
   const buttonDelete = (<HTMLButtonElement>new_row.getElementsByClassName("button-del")[0]);
   buttonDelete.onclick = () => {removeRow(new_row);};
 
-  buttonDelete.classList.toggle("hidden",
+  new_row.setAttribute("data-checked", `${item.checked}`);
+
+  buttonDelete.classList.toggle(hiddenRowClassName,
     table.getElementsByClassName("row").length < 1
   )
 
@@ -108,7 +113,7 @@ function checkRow(row : HTMLElement) {
     ).checked}`
   )
   if (toggleShowUncheckedButton.checked != true) {
-    row.classList.add("hidden");
+    row.classList.add(hiddenRowClassName);
   }
   calcTotal();
 }
@@ -185,6 +190,9 @@ function calcTotal() {
   }
   total.textContent = curr[currentCurrency].format(totalOutput);
   totalChecked.textContent = curr[currentCurrency].format(totalOutputChecked);
+
+  itemsTotalUnchecked.textContent = `${table.getElementsByClassName("row").length}`
+  itemsTotalChecked.textContent = `${table.querySelectorAll(".row[data-checked=\"true\"]").length}`
   // console.log(rows2ListData(table.getElementsByClassName("row")));
 }
 
