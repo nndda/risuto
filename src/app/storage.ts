@@ -1,5 +1,6 @@
 import { addItemRow, currentList, cleanRows, listSwitch } from "./main";
 import { currencyChange } from "./currency";
+import { sampleGrocery } from "../config/sampleList";
 
 const savedListContainer = document.getElementById("saved-list");
 
@@ -26,8 +27,6 @@ export interface ListItem {
   price : number,
   checked : boolean,
 }
-
-export const sampleGrocery : List = require("../config/sampleList.json");
 
 export function row2ListItem(row : HTMLElement) : ListItem {
   return {
