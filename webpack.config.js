@@ -8,7 +8,7 @@ module.exports = {
   mode: "production",
   entry: {
     vendor: "./src/vendor.ts",
-    index: "./index.ts",
+    index: "./src/index.ts",
   },
   resolve: {
     extensions: [".tsx", ".ts", ".js"],
@@ -43,7 +43,11 @@ module.exports = {
       {
         test: /\.css$/i,
         use: [MiniCssExtractPlugin.loader, "css-loader"],
-      },
+      }, 
+      {
+        test: /\.json$/,
+        loader: "json-loader",
+      }
     ]
   },
   optimization: {
