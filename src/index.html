@@ -4,7 +4,9 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>risuto | </title>
+  <title>リスト | Your pocket-sized shopping & grocery list manager </title>
+  <meta name="description" content="A pocket-sized grocery/shopping list to manage your expenses, right in your browser.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛒</text></svg>">
   <meta name="theme-color" content="#eeeeee">
 </head>
 
@@ -62,7 +64,7 @@
         min="1"
         max="999"
         maxlength="3"
-        type="text"
+        type="number"
         class="item-qty"
         value=""
         placeholder="Qty.">
@@ -72,7 +74,7 @@
         min="1"
         max="999999999"
         maxlength="9"
-        type="text"
+        type="number"
         class="item-price"
         value=""
         placeholder="Price">
@@ -107,17 +109,15 @@
           <i class="fa-solid fa-cart-shopping fa-rotate-by" style="--fa-rotate-angle: -15deg;"></i>
         </h1>
         <p>
-          A grocery/shopping list to manage your expenses
+          A pocket-sized grocery/shopping list to manage your expenses.
         </p>
         <blockquote class="info-box">
           <i class="fa-solid fa-circle-info"></i>
           All list are saved in the browser
         </blockquote>
         <div id="saved-list">
-          <button class="grocery-list">This week's grocery</button>
-          <button class="grocery-list">Office supplies</button>
         </div>
-        <button class="grocery-list" id="new-list-btn">
+        <button class="button-wide" id="new-list-btn">
           <i class="fa-solid fa-plus"></i>
           Create new list
         </button>
@@ -135,21 +135,21 @@
       </div>
     </div>
 
-    <div class="list-container">
-      <div id="table">
-        <div class="list-control">
-          <input type="text" name="list-title" id="list-title" value="Untitled list">
-          <div>
-            <label>
-              <input type="checkbox" name="show-unchecked" id="show-unchecked" checked>
-              <i class="checkbox-empty fa-regular fa-square"></i>
-              <i class="checkbox-checked fa-solid fa-square-check"></i>
-            </label>
-            <label for="show-not-done">Show unchecked</label>
-            <select name="list-currency" id="list-currency">
-            </select>
-          </div>
+    <div id="list-container">
+      <div class="list-control">
+        <input type="text" name="list-title" id="list-title" value="Untitled list">
+        <div class="hidden">
+          <label>
+            <input type="checkbox" name="show-unchecked" id="show-unchecked" checked>
+            <i class="checkbox-empty fa-regular fa-square"></i>
+            <i class="checkbox-checked fa-solid fa-square-check"></i>
+          </label>
+          <label for="show-not-done">Show unchecked</label>
+          <select name="list-currency" id="list-currency">
+          </select>
         </div>
+      </div>
+      <div id="table">
       </div>
       <div class="controls-container">
         <button id="add-item">
@@ -180,7 +180,12 @@
           <div id="total" class="display-currency"></div>
           <div>Total checked</div>
           <div id="total-checked" class="display-currency"></div>
-        </div>  
+        </div>
+        <div>
+          <button class="button-wide only-mobile" id="back-home-btn">Back to home</button>
+          <button class="button-wide" id="delete-current-list-btn">Delete this list</button>
+          <!-- <button class="button-wide" id="dbg-print">Debug print</button> -->
+        </div>
       </div>
     </div>
 
