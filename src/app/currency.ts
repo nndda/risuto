@@ -1,14 +1,23 @@
+const d = document;
+
+import { table, calcTotal } from "./main";
+
 const currencies = [
   ["en-US", "USD", "$ USD"],
   ["ja-JP", "JPY", "¥ JPY"],
   ["id-ID", "IDR", "Rp IDR"],
 ];
+
 const defaultCurr = "IDR";
 
-export interface Currency {
-  [key: string]: Intl.NumberFormat
+export let currentCurrency : string = "IDR";
+export let curr : Currency = getCurrency();
+
+interface Currency {
+  [key: string]: Intl.NumberFormat,
 }
-export function getCurrency() {
+
+function getCurrency() {
   let output : Currency = {};
   currencies.forEach(
     (value : string[]) => {
@@ -22,7 +31,8 @@ export function getCurrency() {
   );
   return output
 }
-export function initCurrencySelector(element : HTMLSelectElement) {
+
+function initCurrencySelector(element : HTMLSelectElement) {
   currencies.forEach((value) => {
     let option = document.createElement("option");
     option.textContent = value[2];
@@ -33,3 +43,24 @@ export function initCurrencySelector(element : HTMLSelectElement) {
     element.appendChild(option);
   });
 }
+
+export const currChangeBtn = <HTMLSelectElement>d.getElementById("list-currency");
+currChangeBtn.onchange = () => {
+  currencyChange();
+};
+
+export function currencyChange() {
+  currentCurrency = currChangeBtn.value;
+
+  const itemTotals = table.getElementsByClassName("item-total-display");
+  for (let i = itemTotals.length - 1; i >= 0; i--) {
+    itemTotals[i].textContent = curr[currentCurrency].format(
+      parseFloat(
+        itemTotals[i].getAttribute("data-total-num")
+      )
+    );
+  }
+  calcTotal();
+}
+
+initCurrencySelector(currChangeBtn);
