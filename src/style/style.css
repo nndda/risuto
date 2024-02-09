@@ -440,8 +440,13 @@ hr.footer-divider {
   transform: translateX(.5em) translateY(-.2em);
 }
 
-@media ( min-width : 600px ) {
+.toggle-app-display {
+  max-height: 0 !important;
+  overflow: hidden !important;
+  opacity: 0 !important;
+}
 
+@media ( min-width : 600px ) {
   .only-mobile {
     display: none;
   }
@@ -450,12 +455,6 @@ hr.footer-divider {
 @media ( max-width : 600px ) {
   body {
     font-size: .8em;
-  }
-
-  .toggle-app-display {
-    max-height: 0 !important;
-    overflow: hidden !important;
-    opacity: 0 !important;
   }
 
   #home {
