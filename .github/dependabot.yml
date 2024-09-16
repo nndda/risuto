@@ -12,3 +12,4 @@ updates:
     versioning-strategy: increase-if-necessary
     reviewers:
       - "nndda"
+    target-branch: "dev"
