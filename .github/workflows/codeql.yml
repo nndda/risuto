@@ -9,15 +9,26 @@
 # the `language` matrix defined below to confirm you have the correct set of
 # supported CodeQL languages.
 #
-name: "CodeQL Advanced"
+name: CodeQL
 
 on:
   push:
-    branches: [ "main" ]
+    branches:
+      - main
+      - dev
+    paths:
+      - '**/*.ts'
+      - '**/*.js'
+      - '.github/workflows/codeql.yml'
   pull_request:
-    branches: [ "main" ]
+    branches:
+      - main
+    paths:
+      - '**/*.ts'
+      - '**/*.js'
+      - '.github/workflows/codeql.yml'
   schedule:
-    - cron: '39 4 * * 3'
+    - cron: '0 0 1 * *'
 
 jobs:
   analyze:
